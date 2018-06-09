@@ -70,13 +70,43 @@ exp.get('/', function(request, response) {
 // End Main Express Routing
 
 // Database
-/*
 MongoClient.connect(url, function(err, database) {
     if (err) {
+        pushLog('(PhysPro Database) > ' + err);
+    }
+    else {
+        pushLog('(PhysPro Database) > Database connection successful.');
 
+        var sequence = futures.sequence();
+
+        sequence.then(function(next) {
+            addCollection(database, 'patients');
+            addCollection(database, 'physicians');
+        })
+        .then(function(next) {
+            pushLog()
+            database.close();
+        });
     }
 });
-*/
+
+var addCollection = function(database, collectionName) {
+    var dbo = database.db("heroku_l0dkglh0");
+    
+    dbo.createCollection(collectionName, function(err, res) {
+        if (err) {
+            pushLog("Unable to add collection: " + err);
+        }
+        else {
+            pushLog("Collection added.");
+        }
+    });
+}
+
+var closeDatabase = function(database) {
+    pushLog("(PhysPro Database) > Closing Database.")
+    database.close();
+}
 // End Database
 
 // SocketIO
