@@ -57,7 +57,7 @@ exp.get('/logs', function(request, response) {
 
     logHTML += logBackHTML;
 
-    res.send(logHTML);
+    response.send(logHTML);
 });
 // End Logging
 
