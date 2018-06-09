@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const mongodb = require('mongodb');
-// const futures = require('futures');
+const futures = require('futures');
 const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
@@ -62,11 +62,28 @@ exp.get('/logs', function(request, response) {
 // End Logging
 
 // Database
+/*
+MongoClient.connect(url, function(err, database) {
+    if (err) {
 
+    }
+});
+*/
 // End Database
 
 // SocketIO
+io.on('connection', function(socket) {
+    var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
+    pushLog(connectLog);
 
+    socket.on('performSearch', function(query) {
+        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query + '\'.');
+    });
+
+    socket.on('disconnect', function() {
+        pushLog('(PhysPro Server) > Client [' + socket.handshake.address + '] has disconnected.');
+    });
+});
 // End SocketIO
 
 server.listen(port);
