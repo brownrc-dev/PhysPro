@@ -88,6 +88,10 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query + '\'.');
     });
 
+    socket.on('performCreate', function(query) {
+        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'is currently creating a patient profile. \'' + query + '\'.')
+    });
+
     socket.on('disconnect', function() {
         pushLog('(PhysPro Server) > Client [' + socket.handshake.address + '] has disconnected.');
     });

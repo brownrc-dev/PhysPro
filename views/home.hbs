@@ -198,7 +198,7 @@
                     alert('Please enter a value into the field to the left.');
                 }
                 else {
-                    socket.emit('searchMessage', {
+                    socket.emit('performSearch', {
                         text: searchTextBox.val,
                         type: 'search'
                     });
