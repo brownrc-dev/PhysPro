@@ -85,11 +85,11 @@ io.on('connection', function(socket) {
     pushLog(connectLog);
 
     socket.on('performSearch', function(query) {
-        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query + '\'.');
+        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     });
 
     socket.on('performCreate', function(query) {
-        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'is currently creating a patient profile. \'' + query + '\'.')
+        pushLog('(Client [' + socket.handshake.address + ']) > ' + 'is currently creating a patient profile. \'' + query.text + '\'.')
     });
 
     socket.on('disconnect', function() {

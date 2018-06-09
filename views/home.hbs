@@ -199,8 +199,7 @@
                 }
                 else {
                     socket.emit('performSearch', {
-                        text: searchTextBox.val,
-                        type: 'search'
+                        text: searchTextBox.val(),
                     });
                 }
             });
@@ -214,9 +213,8 @@
                     alert('Please enter a value into the field to the left.');
                 }
                 else {
-                    socket.emit('createMessage', {
+                    socket.emit('performCreate', {
                         text: searchTextBox.val(),
-                        type: 'create'
                     });
                 }
             });
