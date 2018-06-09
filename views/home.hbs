@@ -144,5 +144,20 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
+        <script type="text/javascript" src="./views/js/libs/moment.js"></script>
+        <script type="text/javascript" src="./views/js/libs/mustache.js"></script>
+        <script type="text/javascript">
+            var socket = io();
+
+            socket.on('connect', function(error) {
+                if (error) {
+                    alert(error);
+                }
+            });
+
+            socket.on('disconnect', function() {});
+        </script>
     </body>
 </html>
