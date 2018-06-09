@@ -21,7 +21,7 @@ MongoClient.connect(url, function(err, database) {
 });
 
 exp.get('/logs', function(request, response) {
-    response.render();
+    response.send('<p>Top Kek</p>');
 });
 
 server.listen(port);
