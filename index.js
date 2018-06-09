@@ -62,11 +62,11 @@ exp.get('/logs', function(request, response) {
 // End Logging
 
 // Database
-MongoClient.connect(url, function(err, database) {
-    if (err) {
 
-    }
-});
 // End Database
+
+// SocketIO
+
+// End SocketIO
 
 server.listen(port);
