@@ -94,10 +94,10 @@ var addCollection = function(database, collectionName) {
     
     dbo.createCollection(collectionName, function(err, res) {
         if (err) {
-            pushLog("Unable to add collection: " + err);
+            pushLog("(PhysPro Database) > Unable to add collection: " + err);
         }
         else {
-            pushLog("Collection added.");
+            pushLog("(PhysPro Database) > Collection '" + collectionName + "' added.");
         }
     });
 }
@@ -106,7 +106,6 @@ var closeDatabase = function(database) {
     pushLog("(PhysPro Database) > Closing Database.")
     database.close();
 }
-
 // End Database
 
 // SocketIO
