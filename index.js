@@ -63,7 +63,9 @@ exp.get('/logs', function(request, response) {
 
 // Main Express Routing
 exp.get('/', function(request, response) {
-    
+    response.render('home.hbs', {
+
+    });
 });
 // End Main Express Routing
 
