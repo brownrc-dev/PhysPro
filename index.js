@@ -106,6 +106,7 @@ var closeDatabase = function(database) {
     pushLog("(PhysPro Database) > Closing Database.")
     database.close();
 }
+
 // End Database
 
 // SocketIO
