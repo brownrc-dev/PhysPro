@@ -4,6 +4,92 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <style>
+            html, body, .container {
+                height: 100%;
+            }
+
+            body {
+                padding: 0px;
+                margin: 0px;
+            }
+
+            #main-container {
+                padding: 0px;
+                margin: 0px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            #main-row {
+                width: 100%;
+                height: calc(100% - 56px);
+                padding: 0;
+                margin: 0;
+            }
+
+            .row {
+                width: 100%;
+            }
+
+            .notesNav {
+                height: 100%;
+            }
+
+            .row .no-float {
+                display: table-cell;
+                float: none;
+            }
+
+            .no-marg-pad {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            #nav-row {
+                padding: 0;
+                margin: 0;
+            }
+
+            .ql-editor {
+                margin: 0px;
+                height: 100%;
+            }
+
+            .ql-container {
+                height: 100%;
+            }
+
+            #editor {
+                height: calc(100% - (43px * 2));
+            }
+
+            .space {
+                margin-left: 8px;
+            }
+
+            #current_note_name {
+                color: white;
+                margin-right: 8px;
+                margin-left: 8px;
+            }
+
+            @media(max-width: 991px) {
+                .col-lg-2 {
+                    visibility: hidden;
+                    height: 0px;
+                    width: 0px;
+                }
+
+                .col-sm-10 {
+                    width: 100%;
+                    left: 0px;
+                }
+            }
+        </style>
+        
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>

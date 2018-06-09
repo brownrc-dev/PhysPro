@@ -61,6 +61,12 @@ exp.get('/logs', function(request, response) {
 });
 // End Logging
 
+// Main Express Routing
+exp.get('/', function(request, response) {
+    
+});
+// End Main Express Routing
+
 // Database
 /*
 MongoClient.connect(url, function(err, database) {
