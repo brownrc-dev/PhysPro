@@ -84,8 +84,7 @@ MongoClient.connect(url, function(err, database) {
             addCollection(database, 'physicians');
         })
         .then(function(next) {
-            pushLog()
-            database.close();
+            closeDatabase(database);
         });
     }
 });
