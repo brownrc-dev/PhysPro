@@ -5,6 +5,7 @@ const futures = require('futures');
 const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
+const sequence = require('sequence');
 
 var MongoClient = mongodb.MongoClient;
 var exp = express();
@@ -77,15 +78,15 @@ MongoClient.connect(url, function(err, database) {
     else {
         pushLog('(PhysPro Database) > Database connection successful.');
 
-        var sequence = futures.sequence();
+        var seq = sequence.create();
 
-        sequence.then(function(next) {
-            addCollection(database, 'patients');
-            addCollection(database, 'physicians');
-        })
-        .then(function(next) {
-            closeDatabase(database);
-        });
+        seq.then(function(next) {
+                addCollection(database, 'patients');
+                addCollection(database, 'physicians');
+            })
+            .then(function(next) {
+                closeDatabase(database);
+            });
     }
 });
 
