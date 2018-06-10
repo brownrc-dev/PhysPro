@@ -117,7 +117,7 @@
                             </div>
 
                             <span class="space"></span> <button data-toggle="tooltip" title="Search for a patient" class="btn btn-secondary" type="submit" value="search">Search</button> 
-                            <span class="space"></span> <button data-toggle="tooltip" title="Create a patient entry" class="btn btn-secondary" type="reset" value="create">Create</button>
+                            <span class="space"></span> <button data-toggle="tooltip" title="Create a patient entry" class="btn btn-secondary" onclick="activateNewPatientForm();" type="reset" value="create">Create</button>
                         </form>
                     </nav>
                 </div>
@@ -211,6 +211,10 @@
         <script type="text/javascript">
             var activateTCForm = function() {
                 $("#tc-modal").modal({ backdrop: "static" });
+            };
+
+            var activateNewPatientForm = function() {
+                $("#add-patient-modal").modal({ backdrop: "static" });
             };
 
             var submitTC = function() {
