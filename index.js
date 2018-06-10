@@ -151,6 +151,10 @@ io.on('connection', function(socket) {
         socket.emit('ticketReceived', ticket);
     });
 
+    socket.on('requestTCs', function() {
+        socket.emit('sentTCs', troubleTickets);
+    });
+
     socket.on('disconnect', function() {
         pushLog('(PhysPro Server) > Client [' + socket.handshake.address + '] has disconnected.');
     });
