@@ -57,6 +57,8 @@ var pushTroubleTicket = function(reporter, info) {
 
     troubleTickets.push(ticket);
 
+    insertTCIntoDatabase(ticket);
+
     return ticket;
 }
 
@@ -99,18 +101,30 @@ MongoClient.connect(url, function(err, database) {
 
         addCollection(database, 'patients');
         addCollection(database, 'physicians');
-        /*
-        var sequence = futures.sequence();
+        addCollection(database, 'troubleTickets');
+        
+        var ticketCollection = getAllTroubleTickets();
 
-        sequence.then(function(next) {
-            
-        })
-        .then(function(next) {
-            closeDatabase(database);
-        });
-        */
     }
 });
+
+var getAllTroubleTickets = function(database) {
+    var dbo = database.db("heroku_l0dkglh0");
+
+    var ticketCollection = dbo.collection('troubleTickets').find();
+
+    ticketCollection.each(function(err, currentItem) {
+        if (item == null) {
+            return;
+        }
+
+        troubleTickets.push({
+            client: currentItem.client,
+            information: currentItem.information,
+            ticketNumber: currentItem.ticketNumber
+        });
+    });
+}
 
 var addCollection = function(database, collectionName) {
     var dbo = database.db("heroku_l0dkglh0");
@@ -128,6 +142,25 @@ var addCollection = function(database, collectionName) {
 var closeDatabase = function(database) {
     pushLog("(PhysPro Database) > Closing Database.")
     database.close();
+}
+
+var insertTCIntoDatabase = function(ticket) {
+    MongoClient.connect(url, function(err, database) {
+        if (err) {
+            pushLog('(PhysPro Database) > ' + err);
+        }
+        else {
+            pushLog('(PhysPro Database) > Inserting ticket (' + ticket.ticketNumber + ') into database.');
+            
+            var ticketCollection = db.getCollection('troubleTickets');
+
+            ticketCollection.insertOne({
+                client: ticket.client,
+                information: ticket.information,
+                ticketNumber: ticket.ticketNumber
+            });
+        }
+    });
 }
 // End Database
 
