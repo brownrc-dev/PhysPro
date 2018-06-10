@@ -124,6 +124,10 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'is currently creating a patient profile. \'' + query.text + '\'.')
     });
 
+    socket.on('submitTroubleTicket', function(info) {
+        pushLog('(Client [' + socket.handshake.address + ']) > submitted TC information: ' + info.text)
+    });
+
     socket.on('disconnect', function() {
         pushLog('(PhysPro Server) > Client [' + socket.handshake.address + '] has disconnected.');
     });
