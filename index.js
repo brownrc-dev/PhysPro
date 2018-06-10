@@ -52,7 +52,7 @@ var pushTroubleTicket = function(reporter, info) {
     var ticket = {
         client: reporter,
         information: info,
-        ticketNumber: assignTicketNumber
+        ticketNumber: assignTicketNumber()
     };
 
     troubleTickets.push(ticket);
