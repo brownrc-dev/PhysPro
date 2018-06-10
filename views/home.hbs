@@ -179,6 +179,8 @@
         <script type="text/javascript" src="./views/js/libs/moment.js"></script>
         <script type="text/javascript" src="./views/js/libs/mustache.js"></script>
         <script type="text/javascript">
+            $("#main-container").fadeOut(1250);
+            
             var socket = io();
 
             socket.on('connect', function(error) {
