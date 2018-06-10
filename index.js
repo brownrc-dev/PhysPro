@@ -158,8 +158,29 @@ var insertTCIntoDatabase = function(ticket) {
                 information: ticket.information,
                 ticketNumber: ticket.ticketNumber
             });
+
+            database.close();
         }
     });
+}
+
+var insertPatientIntoDatabase = function(patient) {
+    MongoClient.connect(url, function(err, database) {
+        if (err) {
+            pushLog('(PhysPro Database) > ' + err);
+        }
+        else {
+            pushLog('(PhysPro Database) > Inserting Patient profile (' + patient.name + ") into database.");
+
+            var patientCollection = database.db("heroku_l0dkglh0").collection('patients');
+            
+            patientCollection.insertOne({
+                name: patient.name,
+                phone: patient.phone,
+                address: patient.address
+            });
+        }
+    })
 }
 // End Database
 

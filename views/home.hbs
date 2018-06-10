@@ -76,7 +76,7 @@
                 margin-left: 8px;
             }
 
-            #tc-information-box {
+            #modal-form-input-box {
                 width: 100%;
             }
 
@@ -163,20 +163,47 @@
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Trouble Ticket/Feature Request</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Please input information below.</p>
-                    <input id="tc-information-box" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitTC();">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Trouble Ticket/Feature Request</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please input information below.</p>
+                        <input class="modal-form-input-box" id="tc-information-box" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitTC();">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div id="add-patient-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create a New Patient</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please fill out all fields.</p>
+                        <p>Patient Name</p>
+                        <input class="modal-form-input-box" id="patient-name-box" />
+
+                        <p>Patient Phone Number</p>
+                        <input class="modal-form-input-box" id="patient-phone-box" />
+
+                        <p>Patient Address</p>
+                        <input class="modal-form-input-box" id="patient-address-box" />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewPatient();">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -195,6 +222,26 @@
                 else {
                     socket.emit('submitTroubleTicket', {
                         text: TCInformationBox.val()
+                    });
+                }
+            };
+
+            var submitNewPatient = function() {
+                var nameInputBox = document.getElementById('patient-name-box');
+                var phoneInputBox = document.getElementById('patient-phone-box');
+                var addressInputBox = document.getElementById('patient-address-box');
+
+                if (nameInputBox.val() === ""   || 
+                    phoneInputBox.val() === ""  ||
+                    addressInputBox.val() === "") {
+                    
+                    alert('Not all form fields are filled out. Please fill out all form fields before submitting.');
+                }
+                else {
+                    socket.emit('submitNewPatientForm', {
+                        name: nameInputBox.val(),
+                        phone: phoneInputBox.val(),
+                        address: addressInputBox.val()
                     });
                 }
             };
