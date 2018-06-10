@@ -167,7 +167,7 @@
 
                             </tbody>
                         </table>
-                        <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Add a new trouble ticket" id="create-tc-button">Add Ticket</button>
+                        <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Add a new trouble ticket" id="create-tc-button" onclick="activateTCForm();">Add Ticket</button>
                     </div>
                 </div>
 
@@ -176,7 +176,11 @@
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
-        <script type="text/javascript">            
+        <script type="text/javascript">
+            var activateTCForm = function() {
+                alert('Activate TC Form');
+            };
+
             var socket = io();
 
             socket.on('connect', function(error) {
