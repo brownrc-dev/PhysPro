@@ -149,7 +149,7 @@ var insertTCIntoDatabase = function(ticket) {
         else {
             pushLog('(PhysPro Database) > Inserting ticket (' + ticket.ticketNumber + ') into database.');
             
-            var ticketCollection = db.getCollection('troubleTickets');
+            var ticketCollection = database.getCollection('troubleTickets');
 
             ticketCollection.insertOne({
                 client: ticket.client,
