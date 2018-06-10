@@ -187,10 +187,10 @@
             </div>
             <div class="modal-body">
                 <p>Please input information below.</p>
-                <input id="tc-information" />
+                <input id="tc-information-box" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitTC();">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
             </div>
@@ -202,7 +202,20 @@
         <script type="text/javascript">
             var activateTCForm = function() {
                 $("#tc-modal").modal({ backdrop: "static" });
-            }
+            };
+
+            var submitTC = function() {
+                var TCInformationBox = $('#tc-information-box');
+
+                if (TCInformationBox.val() === "") {
+                    alert('Invalid information entered into TC information field.');
+                }
+                else {
+                    socket.emit('submitTroubleTicket', {
+                        text: TCInformationBox.val()
+                    });
+                }
+            };
 
             var socket = io();
 
@@ -224,7 +237,7 @@
                 }
                 else {
                     socket.emit('performSearch', {
-                        text: searchTextBox.val(),
+                        text: searchTextBox.val()
                     });
                 }
             });
