@@ -104,6 +104,8 @@ MongoClient.connect(url, function(err, database) {
         addCollection(database, 'troubleTickets');
         
         var ticketCollection = getAllTroubleTickets(database);
+
+        database.close();
     }
 });
 
@@ -149,7 +151,7 @@ var insertTCIntoDatabase = function(ticket) {
         else {
             pushLog('(PhysPro Database) > Inserting ticket (' + ticket.ticketNumber + ') into database.');
             
-            var ticketCollection = database.db("heroku_l0dkglh0").getCollection('troubleTickets');
+            var ticketCollection = database.db("heroku_l0dkglh0").collection('troubleTickets');
 
             ticketCollection.insertOne({
                 client: ticket.client,
