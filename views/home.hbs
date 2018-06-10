@@ -211,9 +211,9 @@
             socket.on('ticketReceived', function(ticket) {
                 var table = document.getElementById('ticket-table');
                 var tableRow = table.insertRow();
-                var ticketNumberCell = row.insertCell(0);
-                var informationCell = row.insertCell(1);
-                var reporterCell = row.insertCell(2);
+                var ticketNumberCell = tableRow.insertCell(0);
+                var informationCell = tableRow.insertCell(1);
+                var reporterCell = tableRow.insertCell(2);
 
                 ticketNumberCell.innerHTML = ticket.ticketNumber;
                 informationCell.innerHTML = ticket.information;
@@ -227,9 +227,9 @@
                     var ticket = tickets[i];
 
                     var tableRow = table.insertRow();
-                    var ticketNumberCell = row.insertCell(0);
-                    var informationCell = row.insertCell(1);
-                    var reporterCell = row.insertCell(2);
+                    var ticketNumberCell = tableRow.insertCell(0);
+                    var informationCell = tableRow.insertCell(1);
+                    var reporterCell = tableRow.insertCell(2);
 
                     ticketNumberCell.innerHTML = ticket.ticketNumber;
                     informationCell.innerHTML = ticket.information;
