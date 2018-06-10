@@ -163,6 +163,7 @@ var insertTCIntoDatabase = function(ticket) {
 }
 // End Database
 
+
 // SocketIO
 io.on('connection', function(socket) {
     var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
