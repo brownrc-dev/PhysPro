@@ -205,6 +205,12 @@ io.on('connection', function(socket) {
         socket.emit('ticketReceived', ticket);
     });
 
+    socket.on('submitNewPatientForm', function(patient) {
+        pushLog('(Client [' + socket.handshake.address + ']) > submitted new Patient: ' + patient.name);
+
+        insertPatientIntoDatabase(patient);
+    });
+
     socket.on('requestTCs', function() {
         for (var i = 0; i < troubleTickets.length; i++) {
             socket.emit('ticketReceived', troubleTickets[i]);
