@@ -236,9 +236,9 @@
             };
 
             var submitNewPatient = function() {
-                var nameInputBox = document.getElementById('patient-name-box');
-                var phoneInputBox = document.getElementById('patient-phone-box');
-                var addressInputBox = document.getElementById('patient-address-box');
+                var nameInputBox = $('#patient-name-box');
+                var phoneInputBox = $('#patient-phone-box');
+                var addressInputBox = $('#patient-address-box');
 
                 if (nameInputBox.val() === ""   || 
                     phoneInputBox.val() === ""  ||
@@ -291,21 +291,6 @@
                 else {
                     socket.emit('performSearch', {
                         text: searchTextBox.val()
-                    });
-                }
-            });
-
-            $('#nav-search-input').on('reset', function(e) {
-                e.preventDefault();
-
-                var searchTextBox = $('[name=search-input-box]');
-
-                if (searchTextBox.val() === "") {
-                    alert('Please enter a value into the field to the left.');
-                }
-                else {
-                    socket.emit('performCreate', {
-                        text: searchTextBox.val(),
                     });
                 }
             });
