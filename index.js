@@ -37,6 +37,7 @@ var logBackHTML =           "</table>" +
                     "</html>";
 
 var logs = [];
+var troubleTickets = [];
 
 var pushLog = function(log) {
     console.log(log);
@@ -45,6 +46,25 @@ var pushLog = function(log) {
         time: new Date(),
         info: log
     });
+}
+
+var pushTroubleTicket = function(reporter, info) {
+    var ticket = {
+        client: reporter,
+        information: info,
+        ticketNumber: assignTicketNumber
+    };
+
+    troubleTickets.push(ticket);
+
+    return ticket;
+}
+
+var assignTicketNumber = function() {
+    var min = 1000;
+    var max = 9999;
+
+    return "PTC" + (Math.random() * (max - min) + min);
 }
 
 exp.get('/logs', function(request, response) {
@@ -125,7 +145,10 @@ io.on('connection', function(socket) {
     });
 
     socket.on('submitTroubleTicket', function(info) {
-        pushLog('(Client [' + socket.handshake.address + ']) > submitted TC information: ' + info.text)
+        pushLog('(Client [' + socket.handshake.address + ']) > submitted TC information: ' + info.text);
+        var ticket = pushTroubleTicket(socket.handshake.address, info);
+
+        socket.emit('ticketReceived', ticket);
     });
 
     socket.on('disconnect', function() {
