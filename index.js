@@ -146,7 +146,7 @@ io.on('connection', function(socket) {
 
     socket.on('submitTroubleTicket', function(info) {
         pushLog('(Client [' + socket.handshake.address + ']) > submitted TC information: ' + info.text);
-        var ticket = pushTroubleTicket(socket.handshake.address, info);
+        var ticket = pushTroubleTicket(socket.handshake.address, info.text);
 
         socket.emit('ticketReceived', ticket);
     });
