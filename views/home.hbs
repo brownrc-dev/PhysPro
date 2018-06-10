@@ -167,7 +167,7 @@
 
                             </tbody>
                         </table>
-                        <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="modal" data-target="#tc-modal" id="create-tc-button" onclick="activateTCForm();">Add Ticket</button>
+                        <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Add a new trouble ticket" id="create-tc-button" onclick="activateTCForm();">Add Ticket</button>
                     </div>
                 </div>
 
@@ -182,8 +182,8 @@
             <!-- Modal content-->
             <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Modal Header</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
                 <p>Some text in the modal.</p>
@@ -198,6 +198,10 @@
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
         <script type="text/javascript">
+            var activateTCForm = function() {
+                $("#tc-modal").modal({ backdrop: static });
+            }
+
             var socket = io();
 
             socket.on('connect', function(error) {
