@@ -103,18 +103,15 @@ MongoClient.connect(url, function(err, database) {
         addCollection(database, 'physicians');
         addCollection(database, 'troubleTickets');
         
-        var ticketCollection = getAllTroubleTickets();
-
+        var ticketCollection = getAllTroubleTickets(database);
     }
 });
 
 var getAllTroubleTickets = function(database) {
-    var dbo = database.db("heroku_l0dkglh0");
-
-    var ticketCollection = dbo.collection('troubleTickets').find();
+    var ticketCollection = database.db("heroku_l0dkglh0").collection('troubleTickets').find();
 
     ticketCollection.each(function(err, currentItem) {
-        if (item == null) {
+        if (currentItem == null) {
             return;
         }
 
