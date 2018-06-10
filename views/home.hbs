@@ -220,23 +220,6 @@
                 clientCell.innerHTML = ticket.client;
             });
 
-            socket.on('sentTCs', function(tickets) {
-                var table = document.getElementById('ticket-table');
-                
-                for (var i = 0; i < tickets.length; i++) {
-                    var ticket = tickets[i];
-
-                    var tableRow = table.insertRow();
-                    var ticketNumberCell = tableRow.insertCell(0);
-                    var informationCell = tableRow.insertCell(1);
-                    var reporterCell = tableRow.insertCell(2);
-
-                    ticketNumberCell.innerHTML = ticket.ticketNumber;
-                    informationCell.innerHTML = ticket.information;
-                    clientCell.innerHTML = ticket.client;
-                }
-            });
-
             $('#nav-search-input').on('submit', function(e) {
                 e.preventDefault();
 

@@ -152,7 +152,9 @@ io.on('connection', function(socket) {
     });
 
     socket.on('requestTCs', function() {
-        socket.emit('sentTCs', troubleTickets);
+        for (var i = 0; i < troubleTickets.length; i++) {
+            socket.emit('ticketReceived', troubleTickets[i]);
+        }
     });
 
     socket.on('disconnect', function() {
