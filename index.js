@@ -66,7 +66,7 @@ var assignTicketNumber = function() {
     var min = 1000;
     var max = 9999;
 
-    return "PTC" + (Math.random() * (max - min) + min);
+    return "PTC" + Math.floor((Math.random() * (max - min) + min));
 }
 
 exp.get('/logs', function(request, response) {
