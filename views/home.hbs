@@ -281,6 +281,22 @@
                 ticketNumberCell.innerHTML = ticket.ticketNumber;
                 informationCell.innerHTML = ticket.information;
                 reporterCell.innerHTML = ticket.client;
+
+                tableRow.style.opacity = "0";
+
+                var currentFrame = 0.0;
+
+                var id = setInterval(animate, 5);
+
+                function animate() {
+                    if (currentFrame == 1.0) {
+                        clearInterval(id);
+                    }
+                    else {
+                        currentFrame += 0.1;
+                        tableRow.style.opacity = '' + currentFrame;
+                    }
+                }
             });
 
             $('#nav-search-input').on('submit', function(e) {
