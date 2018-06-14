@@ -280,9 +280,7 @@
 
             socket.on('searchResults', function(results) {
                 homeContainer.hide();
-                homeContainer.remove();
                 searchContainer.add();
-                searchContainer.show(750);
 
                 var currentFrame = 1.0;
 
@@ -294,11 +292,9 @@
                     }
                     else {
                         currentFrame += 0.008;
-                        tableRow.style.opacity = '' + currentFrame;
+                        searchContainer.style.opacity = '' + currentFrame;
                     }
                 }
-
-
             });
 
             socket.on('connect', function(error) {
