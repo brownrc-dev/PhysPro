@@ -280,21 +280,7 @@
 
             socket.on('searchResults', function(results) {
                 homeContainer.hide();
-                searchContainer.add();
-
-                var currentFrame = 1.0;
-
-                var id = setInterval(animate, 10);
-
-                function animate() {
-                    if (currentFrame == 1.0) {
-                        clearInterval(id);
-                    }
-                    else {
-                        currentFrame += 0.008;
-                        searchContainer.style.opacity = '' + currentFrame;
-                    }
-                }
+                searchContainer.show();
             });
 
             socket.on('connect', function(error) {
