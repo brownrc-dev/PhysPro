@@ -296,6 +296,8 @@
                 homeContainer.hide();
                 searchContainer.show();
 
+                console.log(JSON.stringify(results));
+
                 if (results === undefined || results.length == 0) {
                     alert('No patients have been found with this search criteria.');
                 }
