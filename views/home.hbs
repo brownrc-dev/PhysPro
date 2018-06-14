@@ -296,9 +296,6 @@
 
                 console.log(JSON.stringify(results));
 
-                var tableBody = document.getElementById('patient-search-table-body');
-                tableBody.innerHTML = "";
-
                 if (results === undefined || results.length == 0) {
                     alert('No patients have been found with this search criteria.');
                 }
@@ -366,6 +363,9 @@
                     alert('Please enter a value into the field to the left.');
                 }
                 else {
+                    var tableBody = document.getElementById('patient-search-table-body');
+                    tableBody.innerHTML = "";
+
                     socket.emit('performSearch', {
                         text: searchTextBox.val()
                     });
