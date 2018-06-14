@@ -238,8 +238,7 @@ io.on('connection', function(socket) {
 
         async.waterfall([
             function(callback) {
-                patients = performPatientSearch(query.text);
-                callback(patients, null);
+                callback(null, performPatientSearch(query.text));
             },
             function(data, callback) {
                 pushLog('----CHECK---- > ' + JSON.stringify(data));
