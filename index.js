@@ -238,9 +238,10 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
         
         const patients = await performPatientSearch(query.text);
+        const patientsArray = await patients.toArray();
 
-        pushLog('----CHECK---- > ' + JSON.stringify(patients.toArray()));
-        socket.emit('searchResults', patients.toArray());
+        pushLog('----CHECK---- > ' + JSON.stringify(patientsArray));
+        socket.emit('searchResults', patientsArray);
     });
 
     socket.on('performCreate', function(query) {
