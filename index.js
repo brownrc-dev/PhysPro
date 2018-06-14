@@ -248,7 +248,7 @@ io.on('connection', function(socket) {
     socket.on('performSearch', async function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
-        var patients = await performPatientSearch(query.text);
+        const patients = await performPatientSearch(query.text);
         
         await pushLog('----CHECK---- > ' + JSON.stringify(patients));
         await socket.emit('searchResults', patients);
