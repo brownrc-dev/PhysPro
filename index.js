@@ -234,7 +234,7 @@ var performPatientSearch = function(query) {
                     pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
                     return result;
                 }
-            })
+            });
         }
     });
 }
@@ -250,6 +250,8 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
         var patients = performPatientSearch(query.text);
+
+        pushLog('----CHECK---- > ' + JSON.stringify(patients));
 
         socket.emit('searchResults', patients);
     });
