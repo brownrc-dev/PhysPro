@@ -239,8 +239,8 @@ io.on('connection', function(socket) {
         
         const patients = await performPatientSearch(query.text);
 
-        pushLog('----CHECK---- > ' + JSON.stringify(patients));
-        socket.emit('searchResults', patients);
+        pushLog('----CHECK---- > ' + JSON.stringify(patients.toArray()));
+        socket.emit('searchResults', patients.toArray());
     });
 
     socket.on('performCreate', function(query) {
