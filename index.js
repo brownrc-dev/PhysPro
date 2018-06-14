@@ -1,10 +1,10 @@
 const express = require('express');
 const hbs = require('hbs');
 const mongodb = require('mongodb');
-const futures = require('futures');
 const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
+const async = require('async');
 
 var MongoClient = mongodb.MongoClient;
 var exp = express();
@@ -215,7 +215,7 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = async function(query) {
+var performPatientSearch = function(query) {
     MongoClient.connect(url, function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
@@ -245,13 +245,23 @@ io.on('connection', function(socket) {
     var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
     pushLog(connectLog);
 
-    socket.on('performSearch', async function(query) {
+    socket.on('performSearch', function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
-    
-        const patients = await performPatientSearch(query.text);
         
-        await pushLog('----CHECK---- > ' + JSON.stringify(patients));
-        await socket.emit('searchResults', patients);
+        var patients;
+
+        async.waterfall([
+            function(callback) {
+                patients = performPatientSearch(query.text);
+                callback(null, patients);
+            },
+            function(data, callback) {
+                pushLog('----CHECK---- > ' + JSON.stringify(patients));
+                socket.emit('searchResults', patients);
+            }
+        ], function(err, result) {
+            pushLog('(PhysPro Server) > ' + result);
+        });
     });
 
     socket.on('performCreate', function(query) {
