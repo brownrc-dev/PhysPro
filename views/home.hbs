@@ -86,7 +86,7 @@
                 width: 100%;
             }
 
-            #ticket-table {
+            #ticket-table, #patient-table {
                 width: 100%;
             }
 
@@ -171,7 +171,22 @@
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
-                        Search Results
+                        <div class="card main-card">
+                            <h3 class="card-body">Search Results</h3>
+                            <table class="table <!--table-sm--> card-body" id="patient-table">
+                                <thead>
+                                    <tr>
+                                        <th>Phone</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Add a new trouble ticket" id="create-tc-button" onclick="activateTCForm();">Add Ticket</button>
+                        </div>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -281,6 +296,24 @@
             socket.on('searchResults', function(results) {
                 homeContainer.hide();
                 searchContainer.show();
+
+                if (array === undefined || array.length == 0) {
+                    alert('No patients have been found with this search criteria.');
+                }
+                else {
+                    var table = document.getElementById('patient-table');
+
+                    for (var i = 0; i < results.length; i++) {
+                        var tableRow = table.insertRow();
+                        var phoneCell = tableRow.insertCell(0);
+                        var nameCell = tableRow.insertCell(1);
+                        var addressCell = tableRow.insertCell(2);
+
+                        phoneCell.innerHTML = results[i].phone;
+                        nameCell.innerHTML = results[i].name;
+                        addressCell.innerHTML = results[i].address;
+                    }
+                }
             });
 
             socket.on('connect', function(error) {
