@@ -1,0 +1,95 @@
+html, body, .container {
+    height: 100%;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #5C5C5C;
+}
+
+#main-container {
+    padding: 0px;
+    margin: 0px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#main-row {
+    width: 100%;
+    height: calc(100% - 56px);
+    padding: 0;
+    margin: 0;
+}
+
+.row {
+    width: 100%;
+}
+
+.notesNav {
+    height: 100%;
+}
+
+.row .no-float {
+    display: table-cell;
+    float: none;
+}
+
+.no-marg-pad {
+    margin: 0px;
+    padding: 0px;
+}
+
+#nav-row {
+    padding: 0;
+    margin: 0;
+}
+
+.card-body {
+    margin: 5px;
+}
+
+.main-card {
+    margin: 30px;
+    padding: 15px;
+    background-color: #5C5C5C;
+    color: rgba(255,255,255,.5);
+    border-color: rgba(0,0,0,.5);
+}
+
+.space {
+    margin-left: 8px;
+}
+
+#current_patient_name {
+    color: white;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.modal-form-input-box {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.modal-form-bottom-input-box {
+    width: 100%;
+}
+
+#ticket-table, #patient-table {
+    width: 100%;
+}
+
+@media(min-width: 576px) {
+    body {
+        min-width: 1379px;
+    }
+}
+
+@media(max-width: 575px) {
+    body {
+        min-width: 480px; 
+    }
+}
