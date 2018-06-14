@@ -210,7 +210,20 @@ var performPatientSearch = function(query) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            return patientCollection.find({ phone: query }).toArray();
+            var databaseResults = patientCollection.find({ phone: query });
+            var patientsResults = [];
+
+            pushLog('(PhysPro Database) > Results: ' + JSON.stringify(databaseResults));
+
+            databaseResults.forEach(function(document) {
+                patientsResults.push({
+                    name: document.name,
+                    address: document.address,
+                    phone: document.phone
+                });
+            });
+
+            return databaseResults;
         }
     });
 }
