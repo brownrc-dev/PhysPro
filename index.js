@@ -200,8 +200,8 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = async function(query) {
-    MongoClient.connect(url, function(err, database) {
+var performPatientSearch = function(query) {
+    MongoClient.connect(url, async function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
         }
