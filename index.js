@@ -188,9 +188,7 @@ var performPatientSearch = function(query, socket) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var databaseResults = patientCollection.find({ phone: query }).toArray(function(err, result) {
-                pushLog('(PhysPro Database) > Results: ' + JSON.stringify(result));
-                
+            var databaseResults = patientCollection.find({ phone: {$regex: query }}).toArray(function(err, result) {                
                 socket.emit('searchResults', result);
             });
         }
