@@ -253,7 +253,7 @@ io.on('connection', function(socket) {
     socket.on('performSearch', function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
-        var patients = performPatientSearch(query);
+        var patients = performPatientSearch(query.text);
 
         socket.emit('searchResults', patients);
     });
