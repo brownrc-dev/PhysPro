@@ -294,6 +294,8 @@
                 homeContainer.hide();
                 searchContainer.show();
 
+                $('#patient-table').innerHTML('<thead><tr><th>Phone</th><th>Name</th><th>Address</th></tr></thead><tbody></tbody>');
+
                 console.log(JSON.stringify(results));
 
                 if (results === undefined || results.length == 0) {
