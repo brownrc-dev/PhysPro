@@ -110,7 +110,7 @@ MongoClient.connect(url, function(err, database) {
 });
 
 var getAllTroubleTickets = function(database) {
-    var ticketCollection = database.db("heroku_l0dkglh0").collection('troubleTickets').find();
+    var ticketCollection = database.db("heroku_j9sx6sss").collection('troubleTickets').find();
 
     ticketCollection.each(function(err, currentItem) {
         if (currentItem == null) {
@@ -126,7 +126,7 @@ var getAllTroubleTickets = function(database) {
 }
 
 var addCollection = function(database, collectionName) {
-    var dbo = database.db("heroku_l0dkglh0");
+    var dbo = database.db("heroku_j9sx6sss");
     
     dbo.createCollection(collectionName, function(err, res) {
         if (err) {
@@ -151,7 +151,7 @@ var insertTCIntoDatabase = function(ticket) {
         else {
             pushLog('(PhysPro Database) > Inserting ticket (' + ticket.ticketNumber + ') into database.');
             
-            var ticketCollection = database.db("heroku_l0dkglh0").collection('troubleTickets');
+            var ticketCollection = database.db("heroku_j9sx6sss").collection('troubleTickets');
 
             ticketCollection.insertOne({
                 client: ticket.client,
@@ -172,7 +172,7 @@ var insertPatientIntoDatabase = function(patient) {
         else {
             pushLog('(PhysPro Database) > Inserting Patient profile (' + patient.name + ") into database.");
 
-            var patientCollection = database.db("heroku_l0dkglh0").collection('patients');
+            var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
             
             patientCollection.insertOne({
                 name: patient.name,
