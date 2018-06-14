@@ -303,6 +303,7 @@
                 }
                 else {
                     var table = document.getElementById('patient-table');
+                    table.children = [];
 
                     for (var i = 0; i < results.length; i++) {
                         var tableRow = table.insertRow();
