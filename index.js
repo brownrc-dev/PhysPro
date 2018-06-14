@@ -202,10 +202,10 @@ io.on('connection', function(socket) {
     var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
     pushLog(connectLog);
 
-    socket.on('performSearch', async function(query) {
+    socket.on('performSearch', function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
         
-        const patients = await performPatientSearch(query.text, socket);
+        const patients = performPatientSearch(query.text, socket);
     });
 
     socket.on('performCreate', function(query) {
