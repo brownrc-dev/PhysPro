@@ -234,7 +234,7 @@ var performPatientSearch = function(query) {
                         return [];
                     }
                     else {
-                        pushLog('(PhysPro Database) > Query complete. Sending...' + result[0].name);
+                        pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
                         return result;
                     }
                 })
