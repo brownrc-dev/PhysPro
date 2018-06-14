@@ -114,7 +114,7 @@ MongoClient.connect(url, function(err, database) {
             next(null, 2);
         })
         .then(function(next) {
-            closeDatabase(database);
+            // closeDatabase(database);
 
             next(null, 3);
         });
@@ -177,7 +177,7 @@ var insertTCIntoDatabase = function(ticket) {
                 next(null, 1);
             })
             .then(function(next) {
-                closeDatabase(database);
+                // closeDatabase(database);
 
                 next(null, 2);
             });
@@ -207,7 +207,7 @@ var insertPatientIntoDatabase = function(patient) {
                 next(null, 1);
             })
             .then(function(next) {
-                closeDatabase(database);
+                // closeDatabase(database);
 
                 next(null, 2);
             });
