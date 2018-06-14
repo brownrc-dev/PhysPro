@@ -245,22 +245,15 @@ io.on('connection', function(socket) {
     var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
     pushLog(connectLog);
 
-    socket.on('performSearch', function(query) {
+    socket.on('performSearch', async function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
         var sequence = futures.sequence();
-        var patients;
+        var patients = await performPatientSearch(query.text);
         
-        sequence.then(function(next) {
-            patients = performPatientSearch(query.text);
-
-            next(null, 1);
-        })
-        .then(function(next) {
-            pushLog('----CHECK---- > ' + JSON.stringify(patients));
-            
-            socket.emit('searchResults', patients);
-        });
+        pushLog('----CHECK---- > ' + JSON.stringify(patients));
+        
+        socket.emit('searchResults', patients);
     });
 
     socket.on('performCreate', function(query) {
