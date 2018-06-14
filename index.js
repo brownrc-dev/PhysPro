@@ -239,7 +239,7 @@ io.on('connection', function(socket) {
         async.waterfall([
             function(callback) {
                 patients = performPatientSearch(query.text);
-                callback(null, patients);
+                callback(patients, null);
             },
             function(data, callback) {
                 pushLog('----CHECK---- > ' + JSON.stringify(data));
