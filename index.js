@@ -200,7 +200,7 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = async function(query) {
+var performPatientSearch = function(query) {
     MongoClient.connect(url, function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
@@ -210,8 +210,7 @@ var performPatientSearch = async function(query) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var result = patientCollection.find({ phone: query });
-            /* result.toArray(function(err, result) {
+            var result = patientCollection.find({ phone: query }).toArray(function(err, result) {
                 if (err) {
                     pushLog('(PhysPro Database) > Error getting result: ' + err);
                 }
@@ -219,10 +218,7 @@ var performPatientSearch = async function(query) {
                     pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
                     return result;
                 }
-            }); */
-
-            pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
-            return result;
+            });
         }
     });
 }
@@ -238,10 +234,9 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
         
         const patients = await performPatientSearch(query.text);
-        const patientsArray = await patients.toArray();
 
-        pushLog('----CHECK---- > ' + JSON.stringify(patientsArray));
-        socket.emit('searchResults', patientsArray);
+        pushLog('----CHECK---- > ' + JSON.stringify(patients));
+        socket.emit('searchResults', patients);
     });
 
     socket.on('performCreate', function(query) {
