@@ -213,8 +213,6 @@ var performPatientSearch = function(query) {
             var databaseResults = patientCollection.find({ phone: query });
             var patientsResults = [];
 
-            // pushLog('(PhysPro Database) > Results: ' + JSON.stringify(databaseResults));
-
             await databaseResults.forEach(function(document) {
                 patientsResults.push({
                     name: document.name,
@@ -222,6 +220,8 @@ var performPatientSearch = function(query) {
                     phone: document.phone
                 });
             });
+
+            pushLog('(PhysPro Database) > Results: ' + JSON.stringify(patientsResults));
 
             return patientsResults;
         }
