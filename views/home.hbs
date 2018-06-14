@@ -302,6 +302,8 @@
                     alert('No patients have been found with this search criteria.');
                 }
                 else {
+                    $('#patient-table tbody tr').remove();
+
                     var table = document.getElementById('patient-table');
                     table.children = [];
 
