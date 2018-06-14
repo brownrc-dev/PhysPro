@@ -210,20 +210,11 @@ var performPatientSearch = function(query, socket) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var databaseResults = patientCollection.find({ phone: query });
-            var patientsResults = [];
-
-            await databaseResults.forEach(function(document) {
-                patientsResults.push({
-                    name: document.name,
-                    address: document.address,
-                    phone: document.phone
-                });
+            var databaseResults = patientCollection.find({ phone: query }).toArray(function(err, result) {
+                pushLog('(PhysPro Database) > Results: ' + JSON.stringify(result));
+                
+                socket.emit('searchResults', result);
             });
-
-            pushLog('(PhysPro Database) > Results: ' + JSON.stringify(patientsResults));
-
-            socket.emit('searchResults', patientsResults);
         }
     });
 }
