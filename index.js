@@ -228,7 +228,6 @@ var performPatientSearch = function(query) {
             patientCollection.find({ phone: query }).toArray(function(err, result) {
                 if (err) {
                     pushLog('(PhysPro Database) > Error getting result: ' + err);
-                    return [];
                 }
                 else {
                     pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
@@ -249,11 +248,17 @@ io.on('connection', function(socket) {
     socket.on('performSearch', function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
-        var patients = performPatientSearch(query.text);
-
-        pushLog('----CHECK---- > ' + JSON.stringify(patients));
-
-        socket.emit('searchResults', patients);
+        var sequence = futures.sequence();
+        var patients;
+        
+        sequence.then(function(next) {
+            patients = performPatientSearch(query.text);
+        })
+        .then(function(next) {
+            pushLog('----CHECK---- > ' + JSON.stringify(patients));
+            
+            socket.emit('searchResults', patients);
+        });
     });
 
     socket.on('performCreate', function(query) {
