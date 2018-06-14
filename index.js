@@ -150,21 +150,10 @@ var insertTCIntoDatabase = function(ticket) {
             
             var ticketCollection = database.db("heroku_j9sx6sss").collection('troubleTickets');
 
-            var sequence = futures.sequence();
-
-            sequence.then(function(next) {
-                ticketCollection.insertOne({
-                    client: ticket.client,
-                    information: ticket.information,
-                    ticketNumber: ticket.ticketNumber
-                });
-                
-                next(null, 1);
-            })
-            .then(function(next) {
-                // closeDatabase(database);
-
-                next(null, 2);
+            ticketCollection.insertOne({
+                client: ticket.client,
+                information: ticket.information,
+                ticketNumber: ticket.ticketNumber
             });
         }
     });
@@ -180,21 +169,10 @@ var insertPatientIntoDatabase = function(patient) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
             
-            var sequence = futures.sequence();
-
-            sequence.then(function(next) {
-                patientCollection.insertOne({
-                    name: patient.name,
-                    phone: patient.phone,
-                    address: patient.address
-                });
-
-                next(null, 1);
-            })
-            .then(function(next) {
-                // closeDatabase(database);
-
-                next(null, 2);
+            patientCollection.insertOne({
+                name: patient.name,
+                phone: patient.phone,
+                address: patient.address
             });
         }
     })
