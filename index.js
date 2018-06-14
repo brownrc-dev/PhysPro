@@ -10,7 +10,7 @@ var MongoClient = mongodb.MongoClient;
 var exp = express();
 var server = http.createServer(exp);
 var port = process.env.PORT || 3004;
-var url = 'mongodb://nsreverse:Ro600620@ds259620.mlab.com:59620/heroku_8j4rz6kh';
+var url = 'mongodb://nsreverse:Ro600620@ds259250.mlab.com:59250/heroku_j9sx6sss';
 var publicPath = path.join(__dirname, './public');
 var io = socketIO(server);
 
