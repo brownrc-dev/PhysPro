@@ -298,12 +298,19 @@
 
                 console.log(JSON.stringify(results));
 
+                var table = document.getElementById('patient-table');
+                var currentRows = table.getElementsByTagName('tr');
+                var count = currentRows.length;
+
+                while (count > 0) {
+                    table.removeChild(currentRows[count]);
+                    count--;
+                }
+
                 if (results === undefined || results.length == 0) {
                     alert('No patients have been found with this search criteria.');
                 }
                 else {
-                    $('#patient-table tbody tr').remove();
-
                     var table = document.getElementById('patient-table');
                     table.children = [];
 
