@@ -253,6 +253,8 @@ io.on('connection', function(socket) {
         
         sequence.then(function(next) {
             patients = performPatientSearch(query.text);
+
+            next(null, 1);
         })
         .then(function(next) {
             pushLog('----CHECK---- > ' + JSON.stringify(patients));
