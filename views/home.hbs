@@ -185,7 +185,6 @@
 
                                 </tbody>
                             </table>
-                            <button class="btn btn-secondary" style="margin-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Add a new trouble ticket" id="create-tc-button" onclick="activateTCForm();">Add Ticket</button>
                         </div>
                     </div>
                     <div class="col-sm-1"></div>
@@ -297,7 +296,7 @@
                 homeContainer.hide();
                 searchContainer.show();
 
-                if (array === undefined || array.length == 0) {
+                if (results === undefined || results.length == 0) {
                     alert('No patients have been found with this search criteria.');
                 }
                 else {
