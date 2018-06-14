@@ -200,7 +200,7 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = function(query) {
+var performPatientSearch = async function(query) {
     MongoClient.connect(url, function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
@@ -213,9 +213,9 @@ var performPatientSearch = function(query) {
             var databaseResults = patientCollection.find({ phone: query });
             var patientsResults = [];
 
-            pushLog('(PhysPro Database) > Results: ' + JSON.stringify(databaseResults));
+            // pushLog('(PhysPro Database) > Results: ' + JSON.stringify(databaseResults));
 
-            databaseResults.forEach(function(document) {
+            await databaseResults.forEach(function(document) {
                 patientsResults.push({
                     name: document.name,
                     address: document.address,
