@@ -213,7 +213,7 @@ var performPatientSearch = function(query) {
             var databaseResults = patientCollection.find({ phone: query });
             var patientsResults = [];
 
-            await databaseResults.forEach(function(document) {
+            await databaseResults.toArray().forEach(function(document) {
                 patientsResults.push({
                     name: document.name,
                     address: document.address,
