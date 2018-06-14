@@ -233,6 +233,8 @@
             var homeContainer = $("#home-container");
             var searchContainer = $("#search-container");
 
+            searchContainer.hide();
+
             var activateTCForm = function() {
                 $("#tc-modal").modal({ backdrop: "static" });
             };
@@ -277,10 +279,10 @@
             var socket = io();
 
             socket.on('searchResults', function(results) {
-                homeContainer.hide("slow");
+                homeContainer.hide();
                 homeContainer.remove();
                 searchContainer.add();
-                searchContainer.show("slow");
+                searchContainer.show(750);
 
                 var currentFrame = 1.0;
 
