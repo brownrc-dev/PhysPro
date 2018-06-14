@@ -225,22 +225,18 @@ var performPatientSearch = function(query) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var sequence = futures.sequence();
-
-            sequence.then(function(next) {
-                patientCollection.find({ phone: query }).toArray(function(err, result) {
-                    if (err) {
-                        pushLog('(PhysPro Database) > Error getting result: ' + err);
-                        return [];
-                    }
-                    else {
-                        pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
-                        return result;
-                    }
-                })
+            patientCollection.find({ phone: query }).toArray(function(err, result) {
+                if (err) {
+                    pushLog('(PhysPro Database) > Error getting result: ' + err);
+                    return [];
+                }
+                else {
+                    pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
+                    return result;
+                }
             })
         }
-    })
+    });
 }
 // End Database
 
