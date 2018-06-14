@@ -298,6 +298,7 @@
                     alert('No patients have been found with this search criteria.');
                 }
                 else {
+                    $('#patient-table').html('<thead><tr><th>Phone</th><th>Name</th><th>Address</th></tr></thead><tbody></tbody>');
                     var table = document.getElementById('patient-table');
 
                     for (var i = 0; i < results.length; i++) {
@@ -363,8 +364,6 @@
                 else {
                     homeContainer.hide();
                     searchContainer.show();
-                    
-                    $('#patient-table').innerHTML('<thead><tr><th>Phone</th><th>Name</th><th>Address</th></tr></thead><tbody></tbody>');
 
                     socket.emit('performSearch', {
                         text: searchTextBox.val()
