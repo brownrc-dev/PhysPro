@@ -99,25 +99,11 @@ MongoClient.connect(url, function(err, database) {
     else {
         pushLog('(PhysPro Database) > Database connection successful.');
 
-        var sequence = futures.sequence();
+        addCollection(database, 'patients');
+        addCollection(database, 'physicians');
+        addCollection(database, 'troubleTickets');
 
-        sequence.then(function(next) {
-            addCollection(database, 'patients');
-            addCollection(database, 'physicians');
-            addCollection(database, 'troubleTickets');
-
-            next(null, 1);
-        })
-        .then(function(next) {
-            getAllTroubleTickets(database);
-
-            next(null, 2);
-        })
-        .then(function(next) {
-            // closeDatabase(database);
-
-            next(null, 3);
-        });
+        getAllTroubleTickets(database);
     }
 });
 
