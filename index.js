@@ -200,7 +200,7 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = function(query) {
+var performPatientSearch = function(query, socket) {
     MongoClient.connect(url, async function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
@@ -213,7 +213,7 @@ var performPatientSearch = function(query) {
             var databaseResults = patientCollection.find({ phone: query });
             var patientsResults = [];
 
-            await databaseResults.toArray().forEach(function(document) {
+            await databaseResults.forEach(function(document) {
                 patientsResults.push({
                     name: document.name,
                     address: document.address,
@@ -223,7 +223,7 @@ var performPatientSearch = function(query) {
 
             pushLog('(PhysPro Database) > Results: ' + JSON.stringify(patientsResults));
 
-            return patientsResults;
+            socket.emit('searchResults', patientsResults);
         }
     });
 }
@@ -238,10 +238,7 @@ io.on('connection', function(socket) {
     socket.on('performSearch', async function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
         
-        const patients = await performPatientSearch(query.text);
-
-        await pushLog('----CHECK---- > ' + JSON.stringify(patients));
-        socket.emit('searchResults', patients);
+        const patients = await performPatientSearch(query.text, socket);
     });
 
     socket.on('performCreate', function(query) {
