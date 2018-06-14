@@ -23,7 +23,7 @@ var logFrontHTML = "<!DOCTYPE html>" +
                     "<html>" +
                         "<head>"+
                             "<title>PhysPro Logs</title>" +
-                            "<link rel='stylesheet' type='text/css' href='./css/index.css'>" +
+                            "<link rel='stylesheet' type='text/css' href='./css/logs.css'>" +
                         "</head>"+  
 
                         "<body>" +
