@@ -242,7 +242,7 @@ io.on('connection', function(socket) {
                 callback(null, patients);
             },
             function(data, callback) {
-                pushLog('----CHECK---- > ' + JSON.stringify(patients));
+                pushLog('----CHECK---- > ' + JSON.stringify(data));
                 socket.emit('searchResults', patients);
             }
         ], function(err, result) {
