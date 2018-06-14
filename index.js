@@ -201,7 +201,7 @@ var insertPatientIntoDatabase = function(patient) {
     })
 }
 
-var performPatientSearch = function(query) {
+var performPatientSearch = async function(query) {
     MongoClient.connect(url, function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > ' + err);
@@ -211,7 +211,8 @@ var performPatientSearch = function(query) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            patientCollection.find({ phone: query }).toArray(function(err, result) {
+            var result = await patientCollection.find({ phone: query });
+            /* result.toArray(function(err, result) {
                 if (err) {
                     pushLog('(PhysPro Database) > Error getting result: ' + err);
                 }
@@ -219,7 +220,10 @@ var performPatientSearch = function(query) {
                     pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
                     return result;
                 }
-            });
+            }); */
+
+            pushLog('(PhysPro Database) > Query complete. Sending...' + JSON.stringify(result));
+            return result;
         }
     });
 }
