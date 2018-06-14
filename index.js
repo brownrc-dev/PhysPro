@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const mongodb = require('mongodb');
-// const futures = require('futures');
+const futures = require('futures');
 const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
@@ -99,13 +99,25 @@ MongoClient.connect(url, function(err, database) {
     else {
         pushLog('(PhysPro Database) > Database connection successful.');
 
-        addCollection(database, 'patients');
-        addCollection(database, 'physicians');
-        addCollection(database, 'troubleTickets');
-        
-        var ticketCollection = getAllTroubleTickets(database);
+        var sequence = futures.sequence();
 
-        database.close();
+        sequence.then(function(next) {
+            addCollection(database, 'patients');
+            addCollection(database, 'physicians');
+            addCollection(database, 'troubleTickets');
+
+            next(null, 1);
+        })
+        .then(function(next) {
+            getAllTroubleTickets(database);
+
+            next(null, 2);
+        })
+        .then(function(next) {
+            closeDatabase(database);
+
+            next(null, 3);
+        });
     }
 });
 
@@ -153,13 +165,22 @@ var insertTCIntoDatabase = function(ticket) {
             
             var ticketCollection = database.db("heroku_j9sx6sss").collection('troubleTickets');
 
-            ticketCollection.insertOne({
-                client: ticket.client,
-                information: ticket.information,
-                ticketNumber: ticket.ticketNumber
-            });
+            var sequence = futures.sequence();
 
-            database.close();
+            sequence.then(function(next) {
+                ticketCollection.insertOne({
+                    client: ticket.client,
+                    information: ticket.information,
+                    ticketNumber: ticket.ticketNumber
+                });
+                
+                next(null, 1);
+            })
+            .then(function(next) {
+                closeDatabase(database);
+
+                next(null, 2);
+            });
         }
     });
 }
@@ -174,10 +195,21 @@ var insertPatientIntoDatabase = function(patient) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
             
-            patientCollection.insertOne({
-                name: patient.name,
-                phone: patient.phone,
-                address: patient.address
+            var sequence = futures.sequence();
+
+            sequence.then(function(next) {
+                patientCollection.insertOne({
+                    name: patient.name,
+                    phone: patient.phone,
+                    address: patient.address
+                });
+
+                next(null, 1);
+            })
+            .then(function(next) {
+                closeDatabase(database);
+
+                next(null, 2);
             });
         }
     })
