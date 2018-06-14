@@ -223,7 +223,7 @@ var performPatientSearch = async function(query) {
                 });
             });
 
-            return databaseResults;
+            return patientsResults;
         }
     });
 }
