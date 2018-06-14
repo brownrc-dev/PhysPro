@@ -240,7 +240,7 @@ io.on('connection', function(socket) {
         
         const patients = await performPatientSearch(query.text);
 
-        pushLog('----CHECK---- > ' + JSON.stringify(patients));
+        await pushLog('----CHECK---- > ' + JSON.stringify(patients));
         socket.emit('searchResults', patients);
     });
 
