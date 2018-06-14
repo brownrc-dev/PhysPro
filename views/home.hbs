@@ -181,7 +181,7 @@
                                         <th>Address</th>
                                     </tr>
                                 </thead>
-                                <tbody id="patient-search-table-body"></tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -363,8 +363,7 @@
                     alert('Please enter a value into the field to the left.');
                 }
                 else {
-                    var tableBody = document.getElementById('patient-search-table-body');
-                    tableBody.innerHTML = "";
+                    $('#patient-table').innerHTML('<thead><tr><th>Phone</th><th>Name</th><th>Address</th></tr></thead><tbody></tbody>');
 
                     socket.emit('performSearch', {
                         text: searchTextBox.val()
