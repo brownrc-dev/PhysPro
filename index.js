@@ -254,6 +254,8 @@ io.on('connection', function(socket) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
     
         var patients = performPatientSearch(query);
+
+        socket.emit('searchResults', patients);
     });
 
     socket.on('performCreate', function(query) {
