@@ -4,7 +4,6 @@ const mongodb = require('mongodb');
 const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
-const async = require('async');
 
 var MongoClient = mongodb.MongoClient;
 var exp = express();
@@ -211,7 +210,7 @@ var performPatientSearch = async function(query) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var result = await patientCollection.find({ phone: query });
+            var result = patientCollection.find({ phone: query });
             /* result.toArray(function(err, result) {
                 if (err) {
                     pushLog('(PhysPro Database) > Error getting result: ' + err);
@@ -235,22 +234,13 @@ io.on('connection', function(socket) {
     var connectLog = '(PhysPro Server) > Client [' + socket.handshake.address + '] has connected to server. Awaiting response.';
     pushLog(connectLog);
 
-    socket.on('performSearch', function(query) {
+    socket.on('performSearch', async function(query) {
         pushLog('(Client [' + socket.handshake.address + ']) > ' + 'Search query \'' + query.text + '\'.');
         
-        var patients;
+        const patients = await performPatientSearch(query.text);
 
-        async.waterfall([
-            function(callback) {
-                callback(null, performPatientSearch(query.text));
-            },
-            function(data, callback) {
-                pushLog('----CHECK---- > ' + JSON.stringify(data));
-                socket.emit('searchResults', patients);
-            }
-        ], function(err, result) {
-            pushLog('(PhysPro Server) > ' + result);
-        });
+        pushLog('----CHECK---- > ' + JSON.stringify(patients));
+        socket.emit('searchResults', patients);
     });
 
     socket.on('performCreate', function(query) {
