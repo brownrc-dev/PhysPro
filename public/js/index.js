@@ -3,6 +3,14 @@ var searchContainer = $("#search-container");
 
 searchContainer.hide();
 
+document.getElementById("brand").style.cursor = "pointer";
+document.getElementById("brand").onclick(function(e) {
+    e.preventDefault();
+
+    homeContainer.show();
+    searchContainer.hide();
+});
+
 var activateTCForm = function() {
     $("#tc-modal").modal({ backdrop: "static" });
 };
