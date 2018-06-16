@@ -23,9 +23,9 @@
                             <small id="current_user_name"><!-- USER 000000 --></small>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Patients</span>
+                                    <span class="input-group-text">Phone Search</span>
                                 </div>
-                                <input type="text" class="form-control" name="search-input-box">
+                                <input type="text" max="10" class="form-control" name="search-input-box">
                             </div>
 
                             <span class="space"></span> <button data-toggle="tooltip" title="Search for a patient" class="btn btn-secondary" type="submit" value="search">Search</button> 
@@ -181,7 +181,7 @@
                     </div>
                     <div class="modal-body">
                         <p>Please input information below.</p>
-                        <input class="modal-form-input-box" id="tc-information-box" />
+                        <input type="text" class="modal-form-input-box" id="tc-information-box" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitTC();">Submit</button>
@@ -202,13 +202,13 @@
                     <div class="modal-body">
                         <p>Please fill out all fields.</p>
                         <p>Patient Name</p>
-                        <input class="modal-form-input-box" id="patient-name-box" />
+                        <input type="text" class="modal-form-input-box" id="patient-name-box" />
 
                         <p>Patient Phone Number</p>
-                        <input class="modal-form-input-box" id="patient-phone-box" />
+                        <input type="text" max="10" class="modal-form-input-box" id="patient-phone-box" />
 
                         <p>Patient Address</p>
-                        <input class="modal-form-bottom-input-box" id="patient-address-box" />
+                        <input type="text" class="modal-form-bottom-input-box" id="patient-address-box" />
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewPatient();">Submit</button>
@@ -229,7 +229,7 @@
                     <div class="modal-body">
                         <p>Please fill out all fields.</p>
                         <p>Alert Information</p>
-                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+                        <input type="text" class="modal-form-input-box" id="patient-info-alert-box" />
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewAlert();">Submit</button>
@@ -250,7 +250,7 @@
                     <div class="modal-body">
                         <p>Please fill out all fields.</p>
                         <p>Medication Information</p>
-                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+                        <input type="text" class="modal-form-input-box" id="patient-info-medication-box" />
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewMedication();">Submit</button>
@@ -271,7 +271,7 @@
                     <div class="modal-body">
                         <p>Please fill out all fields.</p>
                         <p>Interaction Notes</p>
-                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+                        <input type="text" class="modal-form-input-box" id="patient-info-interaction-box" />
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewInteraction();">Submit</button>
@@ -292,7 +292,7 @@
                     <div class="modal-body">
                         <p>Please fill out all fields.</p>
                         <p>Condition Information</p>
-                        <input class="modal-form-input-box" id="patient-info-condition-box" />
+                        <input type="text" class="modal-form-input-box" id="patient-info-condition-box" />
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewAilment();">Submit</button>

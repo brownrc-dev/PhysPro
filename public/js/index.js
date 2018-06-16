@@ -73,20 +73,100 @@ var submitNewPatient = function() {
     }
 };
 
-var submitNewAlert = function() {
+var submitNewAlert = function(alert) {
+    var alert = $('#patient-info-alert-box').val();
 
+    if (alert === "") {
+        alert('Please insert a valid alert.');
+    }
+    else {
+        var alertsTable = document.getElementById('patient-info-alerts-table');
+
+        if (currentPatient.alerts.length === 0) {
+            alertsTable.innerHTML = '<tbody></tbody>';
+        }
+        
+        var tableRow = alertsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
+
+        defaultCell.innerHTML = alert;
+
+        currentPatient.alerts.push(alert);
+        pushChangesToAccount(currentPatient, 0);
+    }
 };
 
-var submitNewMedication = function() {
+var submitNewMedication = function(medication) {
+    var medication = $('#patient-info-medication-box').val();
 
+    if (medication === "") {
+        alert('Please insert a valid medication.');
+    }
+    else {
+        var medicationsTable = document.getElementById('patient-info-medications-table');
+        
+        if (currentPatient.medications.length === 0) {
+            medicationsTable.innerHTML = '<tbody></tbody>';
+        }
+    
+        var tableRow = medicationsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
+
+        defaultCell.innerHTML = medication;
+
+        currentPatient.medications.push(medication);
+        pushChangesToAccount(currentPatient, 1);
+    }
 };
 
-var submitNewInteraction = function() {
+var submitNewInteraction = function(interaction) {
+    var interaction = $('#patient-info-interaction-box').val();
 
+    if (interaction === "") {
+        alert('Please insert a valid interaction.');
+    }
+    else {
+        var interactionsTable = document.getElementById('patient-info-recent-interactions-table');
+        
+        if (currentPatient.interactions.length === 0) {
+            interactionsTable.innerHTML = '<tbody></tbody>';
+        }
+
+        var tableRow = interactionsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
+
+        defaultCell.innerHTML = interaction;
+
+        currentPatient.interactions.push(interaction);
+        pushChangesToAccount(currentPatient, 2);
+    }    
 };
 
-var submitNewAilment = function() {
+var submitNewAilment = function(ailment) {
+    var ailment = $('#patient-info-condition-box').val();
 
+    if (ailment === "") {
+        alert('Please insert a valid condition.');
+    }
+    else {
+        var ailmentsTable = document.getElementById('patient-info-ailments-table');
+        
+        if (currentPatient.ailments.length === 0) {
+            ailmentsTable.innerHTML = '<tbody></tbody>';
+        }
+
+        var tableRow = ailmentsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
+
+        defaultCell.innerHTML = ailment;
+
+        currentPatient.ailments.push(ailment);
+        pushChangesToAccount(currentPatient, 3);
+    }
+};
+
+var pushChangesToAccount = function(account, mode) {
+    socket.emit('updatePatient', account, mode);
 };
 
 var socket = io();
@@ -249,7 +329,7 @@ socket.on('patientInfoSent', function(patient) {
         var tableRow = ailmentsTable.insertRow();
         var ailmentsCell = tableRow.insertCell(0);
 
-        interactionCell.innerHTML = patient.ailments[i];
+        ailmentsCell.innerHTML = patient.ailments[i];
     }
 });
 
@@ -271,6 +351,32 @@ $('#nav-search-input').on('submit', function(e) {
         });
     }
 });
+
+// https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
+applyNumericInputFilter('search-input-box');
+applyNumericInputFilter('patient-phone-box');
+
+function applyNumericInputFilter(inputBoxId) {
+    $("#" + inputBoxId).keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+}
 
 function patientResultClicked(accountNumber) {
     socket.emit('getAccountInfo', accountNumber);

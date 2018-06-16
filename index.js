@@ -269,6 +269,37 @@ io.on('connection', function(socket) {
         getPatient(accountNumber, socket);
     });
 
+    socket.on('updatePatient', function(account, mode) {
+        MongoClient.connect(url, function(err, database) {
+            var dbo = database.db("heroku_j9sx6sss");
+
+            var accountQuery = { phone: account.phone };
+            var newValues;
+
+            if (mode === 0) {
+                newValues = { $set: { alerts: account.alerts } };
+            }
+            else if (mode === 1) {
+                newValues = { $set: { medications: account.medications } };
+            }
+            else if (mode === 2) {
+                newValues = { $set: { interactions: account.interactions } };
+            }
+            else {
+                newValues = { $set: { ailments: account.ailments } };
+            }
+
+            dbo.collection('patients').updateOne(accountQuery, newValues, function(err, result) {
+                if (err) { 
+                    pushLog('(PhysPro Database) > Error: ' + err); 
+                }
+                else {
+                    pushLog('(PhysPro Database) > User (' + socket.handshake.address + ") has updated account " + account.phone + ".");
+                }
+            });
+        });
+    });
+
     socket.on('disconnect', function() {
         pushLog('(PhysPro Server) > Client [' + socket.handshake.address + '] has disconnected.');
     });
