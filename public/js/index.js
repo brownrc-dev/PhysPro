@@ -120,6 +120,37 @@ socket.on('ticketReceived', function(ticket) {
     }
 });
 
+socket.on('patientInfoSent', function(patient) {
+    homeContainer.hide();
+    searchContainer.hide();
+    profileContainer.show();
+
+    $('#patient-info-table').html('<tbody></tbody>');
+    var table = document.getElementById('patient-info-table');
+
+    for (var i = 0; i < results.length; i++) {
+        var nameTableRow = table.insertRow();
+        var labelNameCell = nameTableRow.insertCell(0);
+        var nameCell = nameTableRow.insertCell(1);
+
+        var addressTableRow = table.insertRow();
+        var labelAddressCell = addressTableRow.insertCell(0);
+        var addressCell = addressTableRow.insertCell(1);
+
+        var phoneTableRow = table.insertRow();
+        var labelPhoneCell = phoneTableRow.insertCell(0);
+        var phoneCell = phoneTableRow.insertCell(1);
+
+        labelNameCell.innerHTML = "Name";
+        labelAddressCell.innerHTML = "Address";
+        labelPhoneCell.innerHTML = "Phone";
+
+        nameCell.innerHTML = patient.name;
+        addressCell.innerHTML = patient.address;
+        phoneCell.innerHTML = patient.phone;
+    }
+});
+
 $('#nav-search-input').on('submit', function(e) {
     e.preventDefault();
 
@@ -140,7 +171,7 @@ $('#nav-search-input').on('submit', function(e) {
 });
 
 function patientResultClicked(accountNumber) {
-    console.log(accountNumber);
+    socket.emit('getAccountInfo', accountNumber);
 }
 
 $('[data-toggle="tooltip"]').tooltip();

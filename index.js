@@ -188,9 +188,31 @@ var performPatientSearch = function(query, socket) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var databaseResults = patientCollection.find({ phone: {$regex: query }}).toArray(function(err, result) {                
+            var databaseResults = patientCollection.find({ phone: { $regex: query }}).toArray(function(err, result) {                
                 pushLog('(PhysPro Database) > Sending results of search query: ' + query);
                 socket.emit('searchResults', result);
+            });
+        }
+    });
+}
+
+var getPatient = function(accountNumber) {
+    MongoClient.connect(url, function(err, database) {
+        if (err) {
+            pushLog('(PhysPro Database) > Failed to get information for patient (' + accountNumber + ').');
+        }
+        else {
+            pushLog('(PhysPro Database) > Getting information for patient (' + accountNumber + ').');
+
+            var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
+
+            var databaseResult = patientCollection.findOne({ phone: accountNumber }).toArray(function(err, result) {
+                pushLog('(PhysPro Database) > Sending account (' + accountNumber + ') to user (' + socket.handshake.address + ').');
+                socket.emit('patientInfoSent', {
+                    name: result.name,
+                    phone: result.phone,
+                    address: result.address
+                });
             });
         }
     });
@@ -229,6 +251,10 @@ io.on('connection', function(socket) {
         for (var i = 0; i < troubleTickets.length; i++) {
             socket.emit('ticketReceived', troubleTickets[i]);
         }
+    });
+
+    socket.on('getAccountInfo', function(accountNumber) {
+        pushLog('(Client [' + socket.handshake.address + ']) > Retrieving information for ' + accountNumber);
     });
 
     socket.on('disconnect', function() {
