@@ -170,11 +170,10 @@
 
         </div>
 
-        <!-- TC Modal -->
+        <!-- ALERTS -->
         <div id="tc-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
-                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Trouble Ticket/Feature Request</h4>
@@ -213,6 +212,90 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewPatient();">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-patient-info-alert-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Account Alert</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please fill out all fields.</p>
+                        <p>Alert Information</p>
+                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewAlert();">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-patient-info-medication-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Medication</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please fill out all fields.</p>
+                        <p>Medication Information</p>
+                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewMedication();">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-patient-info-interaction-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Interaction</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please fill out all fields.</p>
+                        <p>Interaction Notes</p>
+                        <input class="modal-form-input-box" id="patient-info-alert-box" />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewInteraction();">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-patient-info-condition-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Condition</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please fill out all fields.</p>
+                        <p>Condition Information</p>
+                        <input class="modal-form-input-box" id="patient-info-condition-box" />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submitNewAilment();">Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
