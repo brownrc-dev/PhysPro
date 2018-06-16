@@ -338,8 +338,8 @@ $('#nav-search-input').on('submit', function(e) {
 
     var searchTextBox = $('[name=search-input-box]');
 
-    if (searchTextBox.val() === "") {
-        alert('Please enter a value into the field to the left.');
+    if (searchTextBox.val() === "" || '/[a-z]/i'.test(searchTextBox.val())) {
+        alert('Please enter a valid phone number (or part of a phone number) into the field to the left.');
     }
     else {
         homeContainer.hide();
