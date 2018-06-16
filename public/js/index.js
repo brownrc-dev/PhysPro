@@ -1,3 +1,5 @@
+var currentPatient;
+
 var homeContainer = $("#home-container");
 var searchContainer = $("#search-container");
 var profileContainer = $("#patient-profile-container");
@@ -153,6 +155,8 @@ socket.on('ticketReceived', function(ticket) {
 });
 
 socket.on('patientInfoSent', function(patient) {
+    currentPatient = patient;
+
     homeContainer.hide();
     searchContainer.hide();
     profileContainer.show();
@@ -191,6 +195,34 @@ socket.on('patientInfoSent', function(patient) {
     var medicationsTable = document.getElementById('patient-info-medications-table');
     var interactionsTable = document.getElementById('patient-info-recent-interactions-table');
     var ailmentsTable = document.getElementById('patient-info-ailments-table');
+
+    if (patient.alerts.length === 0) {
+        var tableRow = alertsTable.insertRow();
+        var alertCell = tableRow.insertCell(0);
+
+        alertCell.innerHTML = 'None to display';
+    }
+
+    if (patient.medications.length === 0) {
+        var tableRow = alertsTable.insertRow();
+        var alertCell = tableRow.insertCell(0);
+
+        alertCell.innerHTML = 'None to display';
+    }
+
+    if (patient.interactions.length === 0) {
+        var tableRow = alertsTable.insertRow();
+        var alertCell = tableRow.insertCell(0);
+
+        alertCell.innerHTML = 'None to display';
+    }
+
+    if (patient.ailments.length === 0) {
+        var tableRow = alertsTable.insertRow();
+        var alertCell = tableRow.insertCell(0);
+
+        alertCell.innerHTML = 'None to display';
+    }
 
     for (var i = 0; i < patient.alerts.length; i++) {
         var tableRow = alertsTable.insertRow();
