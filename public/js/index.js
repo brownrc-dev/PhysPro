@@ -198,30 +198,30 @@ socket.on('patientInfoSent', function(patient) {
 
     if (patient.alerts.length === 0) {
         var tableRow = alertsTable.insertRow();
-        var alertCell = tableRow.insertCell(0);
+        var defaultCell = tableRow.insertCell(0);
 
-        alertCell.innerHTML = 'None to display';
+        defaultCell.innerHTML = 'None to display';
     }
 
     if (patient.medications.length === 0) {
-        var tableRow = alertsTable.insertRow();
-        var alertCell = tableRow.insertCell(0);
+        var tableRow = medicationsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
 
-        alertCell.innerHTML = 'None to display';
+        defaultCell.innerHTML = 'None to display';
     }
 
     if (patient.interactions.length === 0) {
-        var tableRow = alertsTable.insertRow();
-        var alertCell = tableRow.insertCell(0);
+        var tableRow = interactionsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
 
-        alertCell.innerHTML = 'None to display';
+        defaultCell.innerHTML = 'None to display';
     }
 
     if (patient.ailments.length === 0) {
-        var tableRow = alertsTable.insertRow();
-        var alertCell = tableRow.insertCell(0);
+        var tableRow = ailmentsTable.insertRow();
+        var defaultCell = tableRow.insertCell(0);
 
-        alertCell.innerHTML = 'None to display';
+        defaultCell.innerHTML = 'None to display';
     }
 
     for (var i = 0; i < patient.alerts.length; i++) {
