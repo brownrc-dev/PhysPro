@@ -149,6 +149,44 @@ socket.on('patientInfoSent', function(patient) {
     phoneCell.innerHTML = patient.phone;
 
     $('#patient-info-header').html('' + patient.name + ' (' + patient.phone + ')');
+
+    $('#patient-info-alerts-table').html('<tbody></tbody>');
+    $('#patient-info-medications-table').html('<tbody></tbody>');
+    $('#patient-info-recent-interactions-table').html('<tbody></tbody>');
+    $('#patient-info-ailments-table').html('<tbody></tbody>');
+
+    var alertsTable = document.getElementById('patient-info-alerts-table');
+    var medicationsTable = document.getElementById('patient-info-medications-table');
+    var interactionsTable = document.getElementById('patient-info-recent-interactions-table');
+    var ailmentsTable = document.getElementById('patient-info-ailments-table');
+
+    for (var i = 0; i < patient.alerts.length; i++) {
+        var tableRow = alertsTable.insertRow();
+        var alertCell = tableRow.insertCell(0);
+
+        alertCell.innerHTML = patient.alerts[i];
+    }
+
+    for (var i = 0; i < patient.medications.length; i++) {
+        var tableRow = medicationsTable.insertRow();
+        var medicationCell = tableRow.insertCell(0);
+
+        medicationCell.innerHTML = patient.medications[i];
+    }
+
+    for (var i = 0; i < patient.interactions.length; i++) {
+        var tableRow = interactionsTable.insertRow();
+        var interactionCell = tableRow.insertCell(0);
+
+        interactionCell.innerHTML = patient.interactions[i];
+    }
+
+    for (var i = 0; i < patient.ailments.length; i++) {
+        var tableRow = ailmentsTable.insertRow();
+        var ailmentsCell = tableRow.insertCell(0);
+
+        interactionCell.innerHTML = patient.ailments[i];
+    }
 });
 
 $('#nav-search-input').on('submit', function(e) {
