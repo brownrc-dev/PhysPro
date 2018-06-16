@@ -255,6 +255,7 @@ io.on('connection', function(socket) {
 
     socket.on('getAccountInfo', function(accountNumber) {
         pushLog('(Client [' + socket.handshake.address + ']) > Retrieving information for ' + accountNumber);
+        getPatient(accountNumber);
     });
 
     socket.on('disconnect', function() {
