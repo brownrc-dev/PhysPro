@@ -140,7 +140,7 @@ $('#nav-search-input').on('submit', function(e) {
 });
 
 $('.patient-link').on('click', function(e) {
-    alert(this.innerHTML);
+    console.log(this.innerHTML);
 });
 
 $('[data-toggle="tooltip"]').tooltip();
