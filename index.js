@@ -171,7 +171,11 @@ var insertPatientIntoDatabase = function(patient) {
             patientCollection.insertOne({
                 name: patient.name,
                 phone: patient.phone,
-                address: patient.address
+                address: patient.address,
+                alerts: [],
+                medications: [],
+                interactions: [],
+                ailments: []
             });
         }
     })
@@ -210,7 +214,11 @@ var getPatient = function(accountNumber, socket) {
                 socket.emit('patientInfoSent', {
                     name: result.name,
                     phone: result.phone,
-                    address: result.address
+                    address: result.address,
+                    alerts: result.alerts,
+                    medications: result.medications,
+                    interactions: result.interactions,
+                    ailments: result.ailments
                 });
     
                 if (!result) {
