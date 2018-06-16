@@ -84,9 +84,7 @@ exp.get('/logs', function(request, response) {
 
 // Main Express Routing
 exp.get('/', function(request, response) {
-    response.render('home.hbs', {
-
-    });
+    response.render('home.hbs', {});
 });
 // End Main Express Routing
 
@@ -101,6 +99,7 @@ MongoClient.connect(url, function(err, database) {
         addCollection(database, 'patients');
         addCollection(database, 'physicians');
         addCollection(database, 'troubleTickets');
+        addCollection(database, 'patientInteractions');
 
         getAllTroubleTickets(database);
     }
@@ -214,10 +213,7 @@ var getPatient = function(accountNumber, socket) {
                     address: result.address
                 });
     
-                if (result) {
-                    pushLog('' + JSON.stringify(result));
-                }
-                else {
+                if (!result) {
                     pushLog('Failed to retrieve record: ' + accountNumber);
                 }
             });
