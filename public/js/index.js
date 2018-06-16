@@ -74,7 +74,7 @@ socket.on('searchResults', function(results) {
             var nameCell = tableRow.insertCell(1);
             var addressCell = tableRow.insertCell(2);
 
-            phoneCell.innerHTML = '<span class="patient-link">' + results[i].phone + '</span>';
+            phoneCell.innerHTML = '<span class="patient-link" onclick="patientResultClicked();">' + results[i].phone + '</span>';
             nameCell.innerHTML = results[i].name;
             addressCell.innerHTML = results[i].address;
         }
@@ -139,8 +139,8 @@ $('#nav-search-input').on('submit', function(e) {
     }
 });
 
-$('.patient-link').on('click', function(e) {
+function patientResultClicked() {
     console.log(this.innerHTML);
-});
+}
 
 $('[data-toggle="tooltip"]').tooltip();
