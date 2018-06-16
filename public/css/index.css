@@ -78,6 +78,11 @@ body {
     width: 100%;
 }
 
+.patient-link {
+    color: orangered;
+    cursor: pointer;
+}
+
 #ticket-table, #patient-table {
     width: 100%;
 }

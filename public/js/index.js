@@ -1,7 +1,9 @@
 var homeContainer = $("#home-container");
 var searchContainer = $("#search-container");
+var profileContainer = $("#patient-profile-container");
 
 searchContainer.hide();
+profileContainer.hide();
 
 document.getElementById("brand").style.cursor = "pointer";
 document.getElementById("brand").onclick = function(e) {
@@ -9,6 +11,7 @@ document.getElementById("brand").onclick = function(e) {
 
     homeContainer.show();
     searchContainer.hide();
+    profileContainer.hide();
 };
 
 var activateTCForm = function() {
@@ -71,7 +74,7 @@ socket.on('searchResults', function(results) {
             var nameCell = tableRow.insertCell(1);
             var addressCell = tableRow.insertCell(2);
 
-            phoneCell.innerHTML = results[i].phone;
+            phoneCell.innerHTML = '<span class="patient-link">' + results[i].phone + '</span>';
             nameCell.innerHTML = results[i].name;
             addressCell.innerHTML = results[i].address;
         }
@@ -128,6 +131,7 @@ $('#nav-search-input').on('submit', function(e) {
     else {
         homeContainer.hide();
         searchContainer.show();
+        profileContainer.hide();
 
         socket.emit('performSearch', {
             text: searchTextBox.val()
