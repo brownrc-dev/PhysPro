@@ -269,6 +269,10 @@ io.on('connection', function(socket) {
         getPatient(accountNumber, socket);
     });
 
+    socket.on('requestIPString', function() {
+        socket.emit('ipStringReceived', socket.handshake.address);
+    });
+
     socket.on('updatePatient', function(account, mode) {
         MongoClient.connect(url, function(err, database) {
             var dbo = database.db("heroku_j9sx6sss");
