@@ -196,7 +196,7 @@ var performPatientSearch = function(query, socket) {
     });
 }
 
-var getPatient = function(accountNumber) {
+var getPatient = function(accountNumber, socket) {
     MongoClient.connect(url, function(err, database) {
         if (err) {
             pushLog('(PhysPro Database) > Failed to get information for patient (' + accountNumber + ').');
@@ -206,13 +206,20 @@ var getPatient = function(accountNumber) {
 
             var patientCollection = database.db("heroku_j9sx6sss").collection('patients');
 
-            var databaseResult = patientCollection.findOne({ phone: accountNumber }).toArray(function(err, result) {
+            var databaseResult = patientCollection.findOne({ phone: accountNumber }, function(err, result) {
                 pushLog('(PhysPro Database) > Sending account (' + accountNumber + ') to user (' + socket.handshake.address + ').');
                 socket.emit('patientInfoSent', {
                     name: result.name,
                     phone: result.phone,
                     address: result.address
                 });
+    
+                if (result) {
+                    pushLog('' + JSON.stringify(result));
+                }
+                else {
+                    pushLog('Failed to retrieve record: ' + accountNumber);
+                }
             });
         }
     });
@@ -255,7 +262,7 @@ io.on('connection', function(socket) {
 
     socket.on('getAccountInfo', function(accountNumber) {
         pushLog('(Client [' + socket.handshake.address + ']) > Retrieving information for ' + accountNumber);
-        getPatient(accountNumber);
+        getPatient(accountNumber, socket);
     });
 
     socket.on('disconnect', function() {
