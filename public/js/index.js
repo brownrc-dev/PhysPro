@@ -27,6 +27,8 @@ var submitTC = function() {
         socket.emit('submitTroubleTicket', {
             text: TCInformationBox.val().trim()
         });
+
+        TCInformationBox.val("");
     }
 };
 
@@ -47,6 +49,10 @@ var submitNewPatient = function() {
             phone: phoneInputBox.val(),
             address: addressInputBox.val()
         });
+
+        nameInputBox.val("");
+        phoneInputBox.val("");
+        addressInputBox.val("");
     }
 };
 
@@ -71,6 +77,8 @@ var submitNewAlert = function() {
 
         currentPatient.alerts.push(alert);
         pushChangesToAccount(currentPatient, 0);
+
+        $('#patient-info-alert-box').val("");
     }
 };
 
@@ -95,6 +103,8 @@ var submitNewMedication = function() {
 
         currentPatient.medications.push(medication);
         pushChangesToAccount(currentPatient, 1);
+
+        $('#patient-info-medication-box').val("");
     }
 };
 
@@ -119,6 +129,8 @@ var submitNewInteraction = function() {
 
         currentPatient.interactions.push(interaction);
         pushChangesToAccount(currentPatient, 2);
+
+        $('#patient-info-interaction-box').val("");
     }    
 };
 
@@ -143,6 +155,8 @@ var submitNewAilment = function() {
 
         currentPatient.ailments.push(ailment);
         pushChangesToAccount(currentPatient, 3);
+
+        $('#patient-info-condition-box').val("");
     }
 };
 
@@ -182,6 +196,9 @@ socket.on('connect', function(error) {
         alert(error);
     }
     else {
+        var table = document.getElementById('ticket-table');
+        table.innerHTML = "<thead><tr><th>Ticket</th><th>Issue</th><th>Reporter</th></tr></thead><tbody></tbody>";
+        
         socket.emit('requestTCs');
         socket.emit('requestIPString');
     }
