@@ -83,6 +83,10 @@ body {
     cursor: pointer;
 }
 
+.card-toolbar-item {
+    cursor: pointer;
+}
+
 #ticket-table, #patient-table {
     width: 100%;
 }
