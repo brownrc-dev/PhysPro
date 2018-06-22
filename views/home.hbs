@@ -107,9 +107,7 @@
                         <div class="card main-card">
                             <h3 class="card-body" id="patient-info-header"></h3>
                             <div class="d-flex flex-row-reverse">
-                                <i class="material-icons">clear</i>
-                                <span class="space"></span>
-                                <i class="material-icons">create</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Edit Patient Info" class="material-icons card-toolbar-item" class="material-icons">create</div>
                             </div>
                             <table class="table table-sm card-body" id="patient-info-table">
                                 <tbody></tbody>
@@ -121,9 +119,9 @@
                         <div class="card main-card">
                             <h3 class="card-body" id="patient-info-alerts-header">Account Alerts</h3>
                             <div class="d-flex flex-row-reverse">
-                                <i data-toggle="tooltip" data-placement="bottom" title="Remove all alerts" class="material-icons card-toolbar-item">clear</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Remove all alerts" class="material-icons card-toolbar-item">clear</div>
                                 <span class="space"></span>
-                                <i data-toggle="tooltip" data-placement="bottom" title="Edit all alerts" class="material-icons card-toolbar-item">create</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Edit all alerts" class="material-icons card-toolbar-item">create</div>
                             </div>
                             <table class="table table-sm card-body" id="patient-info-alerts-table">
                                 <tbody></tbody>
@@ -142,9 +140,9 @@
                         <div class="card main-card">
                             <h3 class="card-body" id="patient-info-medications-header">Active Medications</h3>
                             <div class="d-flex flex-row-reverse">
-                                <i data-toggle="tooltip" data-placement="bottom" title="Remove all medications" class="material-icons card-toolbar-item">clear</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Remove all medications" class="material-icons card-toolbar-item">clear</div>
                                 <span class="space"></span>
-                                <i data-toggle="tooltip" data-placement="bottom" title="Edit all medications" class="material-icons card-toolbar-item">create</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Edit all medications" class="material-icons card-toolbar-item">create</div>
                             </div>
                             <table class="table table-sm card-body" id="patient-info-medications-table">
                                 <tbody></tbody>
@@ -159,9 +157,9 @@
                         <div class="card main-card">
                             <h3 class="card-body" id="patient-info-recent-interactions-header">Recent Interactions</h3>
                             <div class="d-flex flex-row-reverse">
-                                <i data-toggle="tooltip" data-placement="bottom" title="Remove all interactions" class="material-icons card-toolbar-item">clear</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Remove all interactions" class="material-icons card-toolbar-item">clear</div>
                                 <span class="space"></span>
-                                <i data-toggle="tooltip" data-placement="bottom" title="Edit all interactions" class="material-icons card-toolbar-item">create</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Edit all interactions" class="material-icons card-toolbar-item">create</div>
                             </div>
                             <table class="table table-sm card-body" id="patient-info-recent-interactions-table">
                                 <tbody></tbody>
@@ -182,9 +180,9 @@
                         <div class="card main-card">
                             <h3 class="card-body" id="patient-info-ailments-header">Active Conditions</h3>
                             <div class="d-flex flex-row-reverse">
-                                <i data-toggle="tooltip" data-placement="bottom" title="Remove all conditions" class="material-icons card-toolbar-item">clear</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Remove all conditions" class="material-icons card-toolbar-item">clear</div>
                                 <span class="space"></span>
-                                <i data-toggle="tooltip" data-placement="bottom" title="Edit all conditions" class="material-icons card-toolbar-item">create</i>
+                                <div data-toggle="tooltip" data-placement="bottom" title="Edit all conditions" class="material-icons card-toolbar-item">create</div>
                             </div>
                             <table class="table table-sm card-body" id="patient-info-ailments-table">
                                 <tbody></tbody>
@@ -334,6 +332,7 @@
                 </div>
             </div>
         </div>
+        <!-- ALERTS -->
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
         <script type="text/javascript" src="./js/utils/load_patient.js"></script>
